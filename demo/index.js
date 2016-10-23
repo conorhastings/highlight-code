@@ -1,5 +1,5 @@
 import SyntaxHighlighter from '../dist';
-import docco from '../dist/styles/docco';
+import docco from 'highlight.js-js-styles/dist/styles/docco';
 
 const codeString = `const woah = fun => fun + 1;
 const dude = woah(2) + 3;

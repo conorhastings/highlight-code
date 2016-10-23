@@ -1,5 +1,5 @@
 import lowlight from 'lowlight';
-import defaultStyle from './styles/default-style';
+import defaultStyle from 'highlight.js-js-styles/dist/styles/default-style';
 
 function createStyleObject(classNames, style) {
   return classNames.reduce((styleObject, className) => {
