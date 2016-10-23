@@ -24,7 +24,7 @@ additional properties will be assigned to the pre tag with `setAttribute`
 
 ```js
 import SyntaxHighlighter from 'code-higlight';
-import { docco } from 'highlight.js-js-styles
+import { docco } from 'highlight.js-js-styles';
 
 const codeString = `const woah = fun => fun + 1;
 const dude = woah(2) + 3;
