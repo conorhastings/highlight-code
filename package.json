@@ -1,0 +1,25 @@
+{
+  "name": "highlight-code",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "watch": "babel src --watch --out-dir dist",
+    "demo": "./node_modules/.bin/webpack --watch --progress"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "webpack": "^1.13.2"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lowlight": "^1.4.0"
+  }
+}
