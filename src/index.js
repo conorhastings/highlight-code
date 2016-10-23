@@ -1,6 +1,21 @@
 import lowlight from 'lowlight';
 import defaultStyle from 'highlight.js-js-styles/dist/styles/default-style';
 
+function assignStyleToElement(style, element) {
+  Object.keys(style).forEach(styleKey => element.style[styleKey] = style[styleKey]);
+}
+
+function assignPropsToElement(props, element) {
+  Object.keys(props).forEach(propKey => {
+    if (propKey === 'style') {
+     assignStyleToElement(props.style, element);
+    }
+    else {
+      element.setAttribute(propKey, props[propKey]);
+    }
+  });
+}
+
 function createStyleObject(classNames, style) {
   return classNames.reduce((styleObject, className) => {
     return {...styleObject, ...style[className]};
@@ -26,7 +41,7 @@ function createElement({ node, style }) {
     const childrenCreator = createChildren(style);
     const elementStyle = createStyleObject(properties.className, style);
     const element = document.createElement(tagName);
-    Object.keys(elementStyle).forEach(styleKey => element.style[styleKey] = elementStyle[styleKey]);
+    assignStyleToElement(elementStyle, element);
     childrenCreator(node.children, element);
     return element;
   }
@@ -47,23 +62,10 @@ export default function SyntaxHighlighter(props) {
   const defaultPreStyle = style.hljs || {backgroundColor: '#fff'};
   const preProps = Object.assign({}, rest, { style: Object.assign({}, defaultPreStyle, customStyle) });
   const pre = document.createElement('pre');
-  Object.keys(preProps).forEach(propKey => {
-    if (propKey === 'style') {
-      Object.keys(preProps[propKey]).forEach(styleKey => pre.style[styleKey] = preProps.style[styleKey]);
-    }
-    else {
-      pre.setAttribute(propKey, preProps[propKey]);
-    }
-  });
+  assignPropsToElement(preProps, pre);
   const code = document.createElement('code');
-  Object.keys(codeTagProps).forEach(propKey => {
-    if (propKey === 'style') {
-      Object.keys(codeTagProps[propKey]).forEach(styleKey => code.style[styleKey] = codeTagProps.style[styleKey]);
-    }
-    else {
-      code.setAttribute(propKey, codeTagProps[propKey]);
-    }
-  });
+  assignPropsToElement(codeTagProps, code);
+
   codeTree.value.forEach(node => {
     const childElement = createElement({ node, style });
     code.appendChild(childElement);
